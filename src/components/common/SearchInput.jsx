@@ -1,9 +1,14 @@
-import PropsType from "prop-types";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
 const SearchInput = ({ onSearchBook }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    onSearchBook(searchTerm);
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -14,7 +19,7 @@ const SearchInput = ({ onSearchBook }) => {
               id="search-dropdown"
               className="z-20 block w-full bg-white px-4 py-2.5 pr-10 text-[#1C4336] placeholder:text-[#1C4336] focus:outline-none"
               placeholder="Search Book"
-              onChange={(e) => onSearchBook(e.target.value)}
+              onChange={(e) => setSearchTerm(e.target.value)}
               required
             />
             <div className="absolute right-0 top-0 flex h-full items-center">
@@ -48,7 +53,7 @@ const SearchInput = ({ onSearchBook }) => {
 };
 
 SearchInput.propTypes = {
-  onSearchBook: PropsType.func.isRequired,
+  onSearchBook: PropTypes.func.isRequired,
 };
 
 export default SearchInput;

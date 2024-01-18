@@ -1,13 +1,20 @@
-import PropsType from "prop-types";
+import PropTypes from "prop-types";
+import { useState } from "react";
 
-const SortingDropdown = ({onSortBook}) => {
+const SortingDropdown = ({ onSortBook }) => {
+  const [sortOption, setSortOption] = useState("");
+
   return (
     <>
       <select
         className="cursor-pointer rounded-md border px-4 py-2 text-center text-gray-600"
         name="sortBy"
         id="sortBy"
-        onChange={(e) => onSortBook(e.target.value)}
+        value={sortOption}
+        onChange={(e) => {
+          setSortOption(e.target.value);
+          onSortBook(e.target.value);
+        }}
       >
         <option value="">Sort</option>
         <option value="name_asc">Name (A-Z)</option>
@@ -20,7 +27,7 @@ const SortingDropdown = ({onSortBook}) => {
 };
 
 SortingDropdown.propTypes = {
-  onSortBook: PropsType.func.isRequired
-}
+  onSortBook: PropTypes.func.isRequired,
+};
 
 export default SortingDropdown;

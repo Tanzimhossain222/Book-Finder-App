@@ -1,23 +1,8 @@
-import React, { useState } from 'react';
+import PropsType from "prop-types";
 import SearchInput from "./SearchInput";
 import SortingDropdown from "./SortingDropdown";
 
-const Header = ({onSearch, onSort}) => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortOption, setSortOption] = useState('');
-
-  const handleSearch = (term) => {
-    setSearchTerm(term);
-   
-    onSearch(term);
-  };
-
-  const handleSort = (option) => {
-    setSortOption(option);
-    onSort(option);
-  };
-
-
+const Header = ({ onSearch, onSort }) => {
   return (
     <>
       <header className="mb-8 lg:mb-10 mx-auto max-w-7xl">
@@ -27,16 +12,21 @@ const Header = ({onSearch, onSort}) => {
             <h2 className="mb-6 font-['Playfair_Display'] text-3xl font-bold lg:text-4xl">
               Trending Books of the Year
             </h2>
-            <SearchInput  onSearchBook= {handleSearch } />
+            <SearchInput onSearchBook={onSearch} />
           </div>
 
           <div className="flex items-stretch space-x-3">
-            <SortingDropdown onSortBook={handleSort} />
+            <SortingDropdown onSortBook={onSort} />
           </div>
         </div>
       </header>
     </>
   );
+};
+
+Header.propTypes = {
+  onSearch: PropsType.func.isRequired,
+  onSort: PropsType.func.isRequired,
 };
 
 export default Header;
