@@ -1,11 +1,17 @@
+import { useState } from "react";
 import BookGrid from "./components/books/BookGrid";
 import Header from "./components/common/Header";
 import Layout from "./components/layout/Layout";
-import { books } from "./db/mockData";
+import { books as mockBooks } from "./db/mockData";
 
 const App = () => {
+  const [books, setBooks] = useState(mockBooks);
+
   const handleSearch = (term) => {
-    console.log(term);
+    const filteredBooks = mockBooks.filter((book) =>
+      book.title.toLowerCase().includes(term.toLowerCase())
+    );
+    setBooks([...filteredBooks]);
   };
 
   const handleSort = (option) => {
